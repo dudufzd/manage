@@ -1,0 +1,12 @@
+server:
+  port: 8094
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: manage_22
+  redis:
+    host: 10.10.33.200
+    port: 6379
+    password: 123456

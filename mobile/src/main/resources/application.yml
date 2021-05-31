@@ -1,0 +1,21 @@
+server:
+  servlet:
+    context-path: /
+  port: 8092
+
+spring:
+  application:
+    name: manage_customer
+  redis:
+    host: 10.10.33.200
+    port: 6379
+    password: 123456
+
+dubbo:
+  registry:
+    address: zookeeper://10.10.33.200:2181
+    timeout: 100000
+  scan:
+    base-packages: com.generate.controller
+
+fileUploadPath: D:/upload/

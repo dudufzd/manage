@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- 页面meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>医疗管家</title>
+        <meta name="description" content="医疗管家">
+        <meta name="keywords" content="医疗管家">
+        <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="../css/style.css">
+        <script src="../js/echarts.js"></script>
+    </head>
+    <body class="hold-transition">
+        <div id="app">
+            <div class="content-header">
+                <h1>统计分析<small>会员分布</small></h1>
+                <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb">
+                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                    <el-breadcrumb-item>统计分析</el-breadcrumb-item>
+                    <el-breadcrumb-item>会员分布</el-breadcrumb-item>
+                </el-breadcrumb>
+            </div>
+            <div class="app-container">
+                <div class="box">
+                    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                    <div id="line" style="height:600px;"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- 引入组件库 -->
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios-0.18.0.js"></script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('line'));
+        // 使用刚指定的配置项和数据显示图表。
+        //myChart.setOption(option);
+
+        axios.get("http://localhost:8090/member/memberClass").then((res)=>{
+            myChart1.setOption(
+	        {
+	            title: {
+	                text: '会员分布'
+	            },
+	            tooltip: {},
+	            legend: {
+	                data:['男', '女', '总数']
+	            },
+	            xAxis: {
+	                data: ["0-18","19-30","30-40","40-50","50-65","65-"]
+	            },
+	            yAxis: {
+	                type:'value'
+	            },
+	            series: [
+			        {
+			            name: '男',
+			            type: 'bar',
+			            data: res.data.data.men
+			        },
+			        {
+			            name: '女',
+			            type: 'bar',
+			            data: res.data.data.women
+		        	},
+			        {
+			            name: '总数',
+			            type: 'bar',
+			            data: res.data.data.total
+		        	}
+		        ]
+	        });
+        });
+//      data:{
+//      	ages:["0-18","19-30","30-40","40-50","50-65","65-"],
+//      	counts:[
+//		        {
+//		            name: '男',
+//		            type: 'bar',
+//		            data: [5, 20, 36, 10, 10, 20]
+//		        },
+//		        {
+//		            name: '女',
+//		            type: 'bar',
+//		            data: [5, 20, 36, 10, 10, 20]
+//	        	},
+//		        {
+//		            name: '总数',
+//		            type: 'bar',
+//		            data: [5, 20, 36, 10, 10, 20]
+//	        	}
+//	        ]
+//      }
+    </script>
+</html>

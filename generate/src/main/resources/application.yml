@@ -1,0 +1,23 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///offcnpe
+    username: root
+    password: root
+  application:
+    name: manage_provider
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-not-delete-value: 1
+      logic-delete-value: 0
+
